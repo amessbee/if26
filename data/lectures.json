@@ -1,0 +1,79 @@
+{
+  "plans": [
+    {
+      "week": "Week 1",
+      "title": "Introduction + Propositional Logic",
+      "summary": "Course overview, propositions, connectives, truth tables."
+    },
+    {
+      "week": "Week 2",
+      "title": "Conditional Statements + Laws of Logic",
+      "summary": "Implications, biconditionals, logical equivalences, De Morgan's laws."
+    },
+    {
+      "week": "Week 3",
+      "title": "Predicate Logic + Quantifiers",
+      "summary": "Predicates, universal and existential quantifiers, domain of discourse."
+    },
+    {
+      "week": "Week 4",
+      "title": "Nested Quantifiers + Rules of Inference + Proofs",
+      "summary": "Nested quantifiers, modus ponens, modus tollens, direct and indirect proofs."
+    },
+    {
+      "week": "Week 5",
+      "title": "Sets + Exam 1",
+      "summary": "Set operations, Venn diagrams, power sets, Cartesian products. Midterm I."
+    },
+    {
+      "week": "Week 6",
+      "title": "Relations + Partial Orders",
+      "summary": "Binary relations, properties (reflexive, symmetric, transitive), equivalence relations, partial orders, Hasse diagrams."
+    },
+    {
+      "week": "Week 7",
+      "title": "Functions",
+      "summary": "Injective, surjective, bijective functions, composition, inverse."
+    },
+    {
+      "week": "Week 8",
+      "title": "Sequences + Algorithmic Thinking",
+      "summary": "Sequences, summations, big-O notation, algorithm analysis."
+    },
+    {
+      "week": "Week 9",
+      "title": "Mathematical Induction + Recurrences",
+      "summary": "Weak and strong induction, well-ordering principle, recurrence relations."
+    },
+    {
+      "week": "Week 10",
+      "title": "Counting Principles + Pigeonhole + Exam 2",
+      "summary": "Multiplication and addition principles, pigeonhole principle. Midterm II."
+    },
+    {
+      "week": "Week 11",
+      "title": "Permutations + Combinations",
+      "summary": "Permutations, combinations, binomial theorem, Pascal's triangle."
+    },
+    {
+      "week": "Week 12",
+      "title": "Advanced Counting + Venn Diagrams",
+      "summary": "Inclusion-exclusion principle, generalized pigeonhole, counting with repetition."
+    },
+    {
+      "week": "Week 13",
+      "title": "Graph Theory",
+      "summary": "Graph definitions, degrees, paths, cycles, connectivity, Euler circuits."
+    },
+    {
+      "week": "Week 14",
+      "title": "Graph Isomorphism + Trees",
+      "summary": "Graph isomorphism, planar graphs, spanning trees, rooted trees."
+    }
+  ],
+  "notes": [],
+  "worksheets": [],
+  "slides": [],
+  "recordings": [],
+  "misc": []
+}

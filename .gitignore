@@ -1,0 +1,7 @@
+
+resources/*/*.aux
+resources/*/*.log
+
+# Ignore Node.js dependencies
+node_modules/
+functions/node_modules/

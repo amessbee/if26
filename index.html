@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Discrete Structures — Fall 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="brand">Discrete Structures <em>•</em> Fall 2026</div>
+        <ul>
+          <li><a href="#announcements">Announcements</a></li>
+          <li><a href="#lectures">Lectures</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#syllabus">Syllabus</a></li>
+          <li><a href="#staff">Teaching Staff</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#misc">Misc</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle theme"
+          >
+            ☀️ Light
+          </button>
+          <button id="nav-toggle" class="toggle" aria-label="Toggle navigation">
+            Menu ▾
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-eyebrow">
+          Discrete Structures &nbsp;·&nbsp; Fall 2026 &nbsp;·&nbsp; LUMS
+        </div>
+        <h1>Discrete Structures</h1>
+        <div class="hero-meta">
+          <span class="hero-chip"
+            ><strong>Instructor</strong> Dr. Mudassir Shabbir</span
+          >
+          <span class="hero-chip"
+            ><strong>Office Hours</strong> MW 12:00–1:00</span
+          >
+          <span class="hero-chip"><strong>Office</strong> SSE 9-G47A</span>
+          <span class="hero-chip"
+            ><strong>Slack</strong>
+            <a href="#" target="_blank"
+              >Join Slack (link TBD)</a
+            ></span
+          >
+          <span class="hero-chip"
+            ><strong>LMS</strong> Check announcements regularly</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <main class="main container">
+      <section id="announcements" class="view">
+        <h2 class="section-title">Announcements</h2>
+        <p class="small">
+          Stay current via LMS and Slack.
+        </p>
+        <div id="announcements-list"></div>
+      </section>
+
+      <section id="lectures" class="view">
+        <h2 class="section-title">Lecture Materials</h2>
+        <p class="small">
+          Lecture notes are mostly scribed by students and may contain errors or
+          omissions. Please verify with official materials.
+        </p>
+        <div
+          id="lecture-materials"
+          class="card-grid"
+          style="margin-top: 1rem"
+        ></div>
+        <p class="small">To contribute lecture notes:</p>
+        <div class="notice">
+          <ul class="list">
+            <li>
+              Clone:
+              <a href="https://github.com/amessbee/if26"
+                >https://github.com/amessbee/if26</a
+              >
+            </li>
+            <li>
+              Create a branch from <span class="badge">main</span> named with
+              your student ID for your lecture notes.
+            </li>
+            <li>Email (and tag) TF/TAs; post announcement to Slack channel.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="schedule" class="view">
+        <h2 class="section-title">Lecture Breakdown (Tentative)</h2>
+        <div id="schedule-table"></div>
+        <h2 class="section-title">Review Sessions (Tentative)</h2>
+        <ul class="list">
+          <li>Logic and Proofs</li>
+          <li>Sets and Relations</li>
+          <li>Counting and Combinatorics</li>
+          <li>Graph Theory</li>
+        </ul>
+      </section>
+
+      <section id="syllabus" class="view">
+        <h2 class="section-title">Grading</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Exams</td>
+                <td>20% + 25% + 30% = 75%</td>
+              </tr>
+              <tr>
+                <td>Homework Assignments</td>
+                <td>10%</td>
+              </tr>
+              <tr>
+                <td>Classroom Worksheets</td>
+                <td>10%</td>
+              </tr>
+              <tr>
+                <td>Slack/GitHub Participation</td>
+                <td>5% (2+2+1)</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>100%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 class="section-title">Grading Scale</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Average</th>
+                <th>Assigned Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>≥ 90</td>
+                <td>A category</td>
+              </tr>
+              <tr>
+                <td>80 — 89.9</td>
+                <td>B category</td>
+              </tr>
+              <tr>
+                <td>70 — 79.9</td>
+                <td>C category</td>
+              </tr>
+              <tr>
+                <td>60 — 69.9</td>
+                <td>D category</td>
+              </tr>
+              <tr>
+                <td>&lt; 60</td>
+                <td>F</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice" style="margin-bottom: 1.5rem">
+          <span class="small"
+            >Final cutoffs determined via relative grading at semester
+            end.</span
+          >
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Exams</h3>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Midterm I</td>
+                  <td>20%</td>
+                </tr>
+                <tr>
+                  <td>Midterm II</td>
+                  <td>25%</td>
+                </tr>
+                <tr>
+                  <td>Final Exam</td>
+                  <td>30%</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="list">
+              <li>Midterms held in-person during regular class hours.</li>
+              <li>
+                <span class="badge" style="background: var(--danger)"
+                  >No make-up exams</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Homework</h3>
+            <ul class="list">
+              <li>Use LaTeX for submissions.</li>
+              <li>Discuss freely but write your own solutions.</li>
+              <li>No late submissions.</li>
+              <li>LUMS academic honesty policy strictly enforced.</li>
+              <li>Cite all resources used.</li>
+              <li>Be able to defend your solutions orally or in writing.</li>
+              <li>Homework questions may appear in exams.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Classroom Worksheets</h3>
+            <ul class="list">
+              <li>Short exercises during lectures — participation matters.</li>
+              <li>Almost weekly; can be done in pairs.</li>
+              <li>No make-up for missed worksheets.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Slack/GitHub Participation</h3>
+            <p class="small">
+              Online engagement: questions, helping peers, live commentary of
+              work, fixing/improving lecture notes.
+            </p>
+            <p class="small">Weight: 2% + 2% + 1%.</p>
+          </div>
+          <div class="card">
+            <h3>Lecture Notes (0%)</h3>
+            <p class="small">
+              Student-created notes for shared learning and clarity.
+            </p>
+            <ul class="list">
+              <li>
+                Clone repo:
+                <a href="https://github.com/amessbee/if26"
+                  >https://github.com/amessbee/if26</a
+                >
+              </li>
+              <li>
+                Create a branch from <span class="badge">main</span> named with
+                your student ID.
+              </li>
+              <li>Email and tag TF/TAs; post announcement to Slack channel.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Rules of the Game</h3>
+            <ul class="list">
+              <li>Turn off phones and electronics; be on time.</li>
+              <li>
+                No whispering — talk to the instructor instead; be honest.
+              </li>
+              <li>
+                Register for PollEv:
+                <a href="https://www.polleverywhere.com/">PollEv.com/cs</a>.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="staff" class="view">
+        <h2 class="section-title">About Your Instructor</h2>
+        <div class="card">
+          <ul class="list">
+            <li>Hi there! I'm <strong>Dr. Mudassir Shabbir</strong>.</li>
+            <li>Associate Professor at CS.</li>
+            <li>
+              Background includes Rutgers, Vanderbilt, Los Alamos National
+              Laboratory, ITU, Bloomberg, Punjab University.
+            </li>
+          </ul>
+          <p class="small">
+            Interests: Combinatorics, Graph Neural Networks, Discrete Geometry.
+          </p>
+        </div>
+        <h2 class="section-title">Teaching Team</h2>
+        <div id="staff-list"></div>
+      </section>
+
+      <section id="contact" class="view">
+        <h2 class="section-title">Reaching Out</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Communication</h3>
+            <ul class="list">
+              <li>
+                Keep up with course announcements on LMS and
+                <strong>Slack</strong>.
+              </li>
+              <li>Office Hours: <strong>MW 12:00pm – 1:00pm</strong></li>
+              <li>Office Location: <strong>SSE 9-G47A</strong></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Email</h3>
+            <ul class="list">
+              <li>Email: <strong>mudassir.shabbir@lums.edu.pk</strong></li>
+              <li>
+                Always write <strong>Discrete Structures</strong> in the subject line along
+                with topic.
+              </li>
+              <li>
+                Always CC the <strong>TA team</strong>.
+              </li>
+            </ul>
+            <h4 class="subtitle">Suggested format</h4>
+            <blockquote class="sample">
+              Subject: Question Regarding HW 3 Problem 1 | Discrete
+              Structures<br /><br />
+              Dear Dr. Mudassir,<br /><br />
+              My name is Sophie (ID: BSCS23439), and I am a student in your
+              Discrete Structures class section A. I am writing to ask for your guidance on
+              a problem I encountered while working on homework 3 Problem
+              1.<br /><br />
+              Specifically, I am having difficulty with [briefly describe the
+              problem or the specific part of the problem you're struggling
+              with]. I have reviewed the course materials and attempted to
+              approach the problem in various ways, but I am still uncertain
+              about [what exactly you are unsure about—e.g., the method, the
+              concept, or the solution].<br /><br />
+              Could you please provide some clarification or suggest any
+              resources that might help me better understand this issue? I would
+              greatly appreciate any advice or direction you could offer.<br /><br />
+              Thank you for your time and assistance.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="misc" class="view">
+        <h2 class="section-title">Course Overview</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Rules of the Game</h3>
+            <ul class="list">
+              <li>Turn off phones and electronics.</li>
+              <li>Be on time; engage by asking questions.</li>
+              <li>Register for PollEv.</li>
+              <li>Be honest and courteous.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Grading Components</h3>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Exams</td>
+                  <td>20% + 25% + 30% = 75%</td>
+                </tr>
+                <tr>
+                  <td>Homework</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>Classroom Worksheets</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>Slack/GitHub Participation</td>
+                  <td>5% (2+2+1)</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Outcomes</h3>
+            <ul class="list">
+              <li>Apply formal logic and proof techniques to mathematical problems.</li>
+              <li>Understand sets, relations, and functions rigorously.</li>
+              <li>Solve combinatorial counting problems.</li>
+              <li>Analyze graphs and trees with discrete math foundations.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Study Tips</h3>
+            <ul class="list">
+              <li>Mile wide, foot deep — do not fall behind.</li>
+              <li>Ask questions; be active.</li>
+              <li>Practice proofs consistently; precision matters.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="section-title">Recommended Books</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Discrete Mathematics and Its Applications</h3>
+            <p class="small">
+              Kenneth H. Rosen — 8th Edition, McGraw-Hill. The primary textbook for this course.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Discrete Mathematics</h3>
+            <p class="small">
+              Richard Johnsonbaugh — 8th Edition, Pearson. Clear exposition with many examples.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Concrete Mathematics</h3>
+            <p class="small">
+              Graham, Knuth, Patashnik — 2nd Edition, Addison-Wesley. Deep dive into counting and recurrences.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      © 2026 Discrete Structures &nbsp;·&nbsp; LUMS &nbsp;·&nbsp; Built for course
+      sharing
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

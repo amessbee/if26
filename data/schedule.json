@@ -1,0 +1,32 @@
+{
+  "rows": [
+    {
+      "left": "Week 1: Introduction + Propositional Logic",
+      "right": "Week 8: Sequences + Algorithmic Thinking"
+    },
+    {
+      "left": "Week 2: Conditional Statements + Laws of Logic",
+      "right": "Week 9: Mathematical Induction + Recurrences"
+    },
+    {
+      "left": "Week 3: Predicate Logic + Quantifiers",
+      "right": "Week 10: Counting Principles + Pigeonhole + Exam 2"
+    },
+    {
+      "left": "Week 4: Nested Quantifiers + Rules of Inference + Proofs",
+      "right": "Week 11: Permutations + Combinations"
+    },
+    {
+      "left": "Week 5: Sets + Exam 1",
+      "right": "Week 12: Advanced Counting + Venn Diagrams"
+    },
+    {
+      "left": "Week 6: Relations + Partial Orders",
+      "right": "Week 13: Graph Theory"
+    },
+    {
+      "left": "Week 7: Functions",
+      "right": "Week 14: Graph Isomorphism + Trees"
+    }
+  ]
+}
