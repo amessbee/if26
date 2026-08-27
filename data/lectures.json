@@ -73,7 +73,13 @@
   ],
   "notes": [],
   "worksheets": [],
-  "slides": [],
+  "slides": [
+    {
+      "date": "2026-08-25",
+      "title": "Lecture 1 — Introduction & Propositional Logic",
+      "link": "resources/slides/l1.pdf"
+    }
+  ],
   "recordings": [],
   "misc": []
 }

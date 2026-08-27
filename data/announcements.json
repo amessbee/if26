@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "date": "2026-08-27",
+      "title": "Lecture 1 slides posted",
+      "body": "Slides for Lecture 1 (Introduction & Propositional Logic) are now available under Lecture Materials: <a target=\"_blank\" href=\"resources/slides/l1.pdf\">Download PDF</a>."
+    },
+    {
       "date": "2026-08-25",
       "title": "Welcome to Discrete Structures — Fall 2026",
       "body": "Please check LMS regularly for updates and join the course Slack channel."
