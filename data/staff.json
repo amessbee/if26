@@ -1,10 +1,22 @@
 {
   "instructor": {
     "name": "Dr. Mudassir Shabbir",
-    "affiliation": "Associate Professor at CS"
+    "affiliation": "Associate Professor, CS · LUMS"
   },
-  "coInstructor": "TBD",
+  "coInstructor": "Muhammad Ahsan Khan (Teaching Fellow) — Mon/Wed/Fri 9:00–11:00 AM, CS right wing (9-G48), muhammad.ahsankhan@lums.edu.pk",
   "tas": [
-    "TBD"
+    "Maiza Fayyaz (Head TA) — Tue/Thu 2:00–4:00 PM + open hours, TA Room 1/2, 28100006@lums.edu.pk",
+    "Bakhtawar Tariq — Mon/Wed 11:00 AM–12:00 PM, Offside Cafe / Green Olive, 28100508@lums.edu.pk",
+    "Omer Ahmed — Mon/Wed 11:00 AM–12:00 PM, TA Room 1, 28100127@lums.edu.pk",
+    "Muhammad Kaif Noor — Mon/Wed 2:00–3:00 PM, SSE TA Room 1, 28100266@lums.edu.pk",
+    "Fatima Amin — Mon/Wed 11:00 AM–12:00 PM, TA Room, 28100013@lums.edu.pk",
+    "Muhammad Ahmad Jalil — Tue/Thu 12:00–1:00 PM, TA Room 1/2, 28100344@lums.edu.pk",
+    "Moiz Ali — Mon/Wed 2:00–3:00 PM, CS Student Lounge, 28100517@lums.edu.pk",
+    "Maha Aurangzeb — Tue/Thu 2:30–3:30 PM, TA Rooms / CS Lounge, 28100312@lums.edu.pk",
+    "Hassan Adnan — Mon/Wed 2:00–3:00 PM, TA Room 1, 28100032@lums.edu.pk",
+    "Shehleem Shahzad — Mon/Wed 2:30–3:30 PM, CS Lounge, 28100394@lums.edu.pk",
+    "Moosa Jafry — Tue/Thu 4:00–5:00 PM, 28100189@lums.edu.pk",
+    "Mian Saifullah Shakir Jan — Thu 3:30–4:30 PM, TA Room, 27100279@lums.edu.pk",
+    "Haseeb Ali — Tue/Thu 2:15–3:15 PM, PDC 1st Floor, 28100514@lums.edu.pk"
   ]
 }
