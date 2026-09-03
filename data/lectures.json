@@ -76,6 +76,11 @@
   "slides": [
     {
       "date": "2026-09-01",
+      "title": "Lecture 3 — Laws of Logic",
+      "link": "resources/slides/l3.pdf"
+    },
+    {
+      "date": "2026-09-01",
       "title": "Lecture 2 — Conditional Statements & Laws of Logic",
       "link": "resources/slides/l2.pdf"
     },

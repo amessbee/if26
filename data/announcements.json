@@ -2,6 +2,11 @@
   "items": [
     {
       "date": "2026-09-01",
+      "title": "Lecture 3 slides posted",
+      "body": "Slides for Lecture 3 (Laws of Logic) are now available under Lecture Materials: <a target=\"_blank\" href=\"resources/slides/l3.pdf\">Download PDF</a>."
+    },
+    {
+      "date": "2026-09-01",
       "title": "Lecture 2 slides posted",
       "body": "Slides for Lecture 2 (Conditional Statements & Laws of Logic) are now available under Lecture Materials: <a target=\"_blank\" href=\"resources/slides/l2.pdf\">Download PDF</a>."
     },
