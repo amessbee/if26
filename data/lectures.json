@@ -75,6 +75,11 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-09-08",
+      "title": "Lecture 4 — Equivalence Laws & Predicate Logic",
+      "link": "resources/slides/l4.pdf"
+    },
+    {
       "date": "2026-09-03",
       "title": "Lecture 3 — Laws of Logic",
       "link": "resources/slides/l3.pdf"
