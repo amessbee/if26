@@ -2,6 +2,11 @@
   "items": [
     {
       "date": "2026-09-08",
+      "title": "Lecture 5 slides posted",
+      "body": "Slides for Lecture 5 (Nested Quantifiers) are now available. \n Note: The slideset also contains extra practice examples that were not covered in class: <a target=\"_blank\" href=\"resources/slides/l5.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-09-08",
       "title": "Long Quiz 1 Dates",
       "body": "Long Quiz 1 will be held on Oct 6, 6:30 PM in SDSB."
     },
