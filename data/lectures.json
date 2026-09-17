@@ -75,6 +75,11 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-09-17",
+      "title": "Lecture 7 — Proofs",
+      "link": "resources/slides/l7.pdf"
+    },
+    {
       "date": "2026-09-15",
       "title": "Lecture 6 — Rules of Inference",
       "link": "resources/slides/l6.pdf"
