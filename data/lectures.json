@@ -75,6 +75,11 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-09-22",
+      "title": "Lecture 8 — Proofs By Contradiction and Induction",
+      "link": "resources/slides/l8.pdf"
+    },
+    {
       "date": "2026-09-17",
       "title": "Lecture 7 — Proofs",
       "link": "resources/slides/l7.pdf"
