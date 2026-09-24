@@ -75,6 +75,11 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-09-24",
+      "title": "Lecture 9 — Induction and Strong Induction",
+      "link": "resources/slides/l9.pdf"
+    },
+    {
       "date": "2026-09-22",
       "title": "Lecture 8 — Proofs By Contradiction and Induction",
       "link": "resources/slides/l8.pdf"
