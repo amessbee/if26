@@ -1,6 +1,31 @@
 {
   "items": [
     {
+      "date": "2026-15-08",
+      "title": "Lecture 9 slides posted",
+      "body": "Slides for Lecture 9 (Induction and Strong Induction) are now available. These include the questions from the worksheet as well as additional exercises. You can access them <a target=\"_blank\" href=\"resources/slides/l9.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-15-08",
+      "title": "Lecture 8 slides posted",
+      "body": "Slides for Lecture 8 (Proof by Contradiction and Induction) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l8.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-15-08",
+      "title": "Lecture 7 slides posted",
+      "body": "Slides for Lecture 7 (Proofs) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l7.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-15-08",
+      "title": "Lecture 6 slides posted",
+      "body": "Slides for Lecture 6 (Rules of Inference) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l6.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-09-08",
+      "title": "Lecture 5 slides posted",
+      "body": "Slides for Lecture 5 (Nested Quantifiers) are now available. \n Note: The slideset also contains extra practice examples that were not covered in class: <a target=\"_blank\" href=\"resources/slides/l5.pdf\">Download PDF</a>"
+    },
+    {
       "date": "2026-09-08",
       "title": "Long Quiz 1 Dates",
       "body": "Long Quiz 1 will be held on Oct 6, 6:30 PM in SDSB."

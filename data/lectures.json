@@ -75,6 +75,31 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-09-24",
+      "title": "Lecture 9 — Induction and Strong Induction",
+      "link": "resources/slides/l9.pdf"
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Lecture 8 — Proofs By Contradiction and Induction",
+      "link": "resources/slides/l8.pdf"
+    },
+    {
+      "date": "2026-09-17",
+      "title": "Lecture 7 — Proofs",
+      "link": "resources/slides/l7.pdf"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Lecture 6 — Rules of Inference",
+      "link": "resources/slides/l6.pdf"
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Lecture 5 — Nested Quantifiers",
+      "link": "resources/slides/l5.pdf"
+    },
+    {
       "date": "2026-09-08",
       "title": "Lecture 4 — Equivalence Laws & Predicate Logic",
       "link": "resources/slides/l4.pdf"
