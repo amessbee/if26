@@ -5,3 +5,4 @@ resources/*/*.log
 # Ignore Node.js dependencies
 node_modules/
 functions/node_modules/
+.DS_Store
