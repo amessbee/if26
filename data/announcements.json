@@ -1,27 +1,42 @@
 {
   "items": [
     {
-      "date": "2026-15-08",
+      "date": "2026-09-28",
+      "title": "Professor Availability",
+      "body": "Dr Mudassir is traveling Oct 02 (Fri) to Oct 07 (Wed) so his online availability will be limited during this time. He will have usual office hours tomorrow(Sept 29th) and on Thursday(Oct 1st) - hoping you make most of them."
+    },
+    {
+      "date": "2026-09-28",
+      "title": "Practice Session",
+      "body": "A practice session will take place on Tuesday 6th Oct during regular class timings."
+    },
+    {
+      "date": "2026-09-28",
+      "title": "LQ1 Practice Paper posted",
+      "body": " You can access the practice problems <a target=\"_blank\" href=\"/resources/practice/practice-lq1.pdf\">here</a>"
+    },
+    {
+      "date": "2026-09-24",
       "title": "Lecture 9 slides posted",
       "body": "Slides for Lecture 9 (Induction and Strong Induction) are now available. These include the questions from the worksheet as well as additional exercises. You can access them <a target=\"_blank\" href=\"resources/slides/l9.pdf\">Download PDF</a>"
     },
     {
-      "date": "2026-15-08",
+      "date": "2026-09-22",
       "title": "Lecture 8 slides posted",
       "body": "Slides for Lecture 8 (Proof by Contradiction and Induction) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l8.pdf\">Download PDF</a>"
     },
     {
-      "date": "2026-15-08",
+      "date": "2026-09-17",
       "title": "Lecture 7 slides posted",
       "body": "Slides for Lecture 7 (Proofs) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l7.pdf\">Download PDF</a>"
     },
     {
-      "date": "2026-15-08",
+      "date": "2026-09-15",
       "title": "Lecture 6 slides posted",
       "body": "Slides for Lecture 6 (Rules of Inference) are now available. You can access them <a target=\"_blank\" href=\"resources/slides/l6.pdf\">Download PDF</a>"
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-10",
       "title": "Lecture 5 slides posted",
       "body": "Slides for Lecture 5 (Nested Quantifiers) are now available. \n Note: The slideset also contains extra practice examples that were not covered in class: <a target=\"_blank\" href=\"resources/slides/l5.pdf\">Download PDF</a>"
     },
