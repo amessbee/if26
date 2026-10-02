@@ -75,6 +75,11 @@
   "worksheets": [],
   "slides": [
     {
+      "date": "2026-10-01",
+      "title": "Lecture 11 — Sets",
+      "link": "resources/slides/l10.pdf"
+    },
+    {
       "date": "2026-09-29",
       "title": "Lecture 10 — Induction Extensions and Strong Induction",
       "link": "resources/slides/l10.pdf"

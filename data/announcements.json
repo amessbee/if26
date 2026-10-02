@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "date": "2026-10-02",
+      "title": "Lecture 11 slides posted",
+      "body": "Slides for Lecture 11 (Sets) are now available. These include the questions from the worksheet as well as additional exercises. You can access them <a target=\"_blank\" href=\"resources/slides/l11.pdf\">Download PDF</a>"
+    },
+    {
       "date": "2026-09-29",
       "title": "Lecture 10 slides posted",
       "body": "Slides for Lecture 10 (Induction Extensions and Strong Induction) are now available. These include the questions from the worksheet as well as additional exercises. You can access them <a target=\"_blank\" href=\"resources/slides/l10.pdf\">Download PDF</a>"
