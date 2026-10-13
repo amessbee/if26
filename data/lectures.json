@@ -72,8 +72,44 @@
     }
   ],
   "notes": [],
-  "worksheets": [],
+  "worksheets": [
+    {
+      "date": "2026-10-13",
+      "title": "Worksheet 14",
+      "link": "resources/worksheets/w14.pdf"
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Worksheet 13",
+      "link": "resources/worksheets/w13.pdf"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "Worksheet 11 — Induction and Strong Induction",
+      "link": "resources/worksheets/ws11.pdf"
+    },
+    {
+      "date": "2026-09-29",
+      "title": "Worksheet 10",
+      "link": "resources/worksheets/ws10.pdf"
+    },
+    {
+      "date": "2026-09-24",
+      "title": "Worksheet 9",
+      "link": "resources/worksheets/ws9.pdf"
+    },
+    {
+      "date": "2026-09-03",
+      "title": "Worksheet 3",
+      "link": "resources/worksheets/ws3.pdf"
+    }
+  ],
   "slides": [
+    {
+      "date": "2026-10-13",
+      "title": "Lecture 14 — Relation Repairs",
+      "link": "resources/slides/l14.pdf"
+    },
     {
       "date": "2026-10-08",
       "title": "Lecture 13 — Relations",
