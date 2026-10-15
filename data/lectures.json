@@ -74,6 +74,11 @@
   "notes": [],
   "worksheets": [
     {
+      "date": "2026-10-15",
+      "title": "Worksheet 15",
+      "link": "resources/worksheets/ws15.pdf"
+    },
+    {
       "date": "2026-10-13",
       "title": "Worksheet 14",
       "link": "resources/worksheets/ws14.pdf"
@@ -105,6 +110,11 @@
     }
   ],
   "slides": [
+    {
+      "date": "2026-10-15",
+      "title": "Lecture 15 — Relation Repairs",
+      "link": "resources/slides/l15.pdf"
+    },
     {
       "date": "2026-10-13",
       "title": "Lecture 14 — Relation Repairs",
