@@ -71,7 +71,13 @@
       "summary": "Graph isomorphism, planar graphs, spanning trees, rooted trees."
     }
   ],
-  "notes": [],
+  "notes": [
+    {
+      "date": "2026-10-15",
+      "title": "Lec 15 Notes",
+      "link": "resources/notes/n15.pdf"
+    }
+  ],
   "worksheets": [
     {
       "date": "2026-10-15",
