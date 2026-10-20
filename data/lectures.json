@@ -73,12 +73,22 @@
   ],
   "notes": [
     {
+      "date": "2026-10-20",
+      "title": "Lec 16 Notes",
+      "link": "resources/notes/n16.pdf"
+    },
+    {
       "date": "2026-10-15",
       "title": "Lec 15 Notes",
       "link": "resources/notes/n15.pdf"
     }
   ],
   "worksheets": [
+    {
+      "date": "2026-10-20",
+      "title": "Worksheet 16",
+      "link": "resources/worksheets/ws16.pdf"
+    },
     {
       "date": "2026-10-15",
       "title": "Worksheet 15",
@@ -116,6 +126,11 @@
     }
   ],
   "slides": [
+    {
+      "date": "2026-10-20",
+      "title": "Lecture 16 — Partial and Total Orders",
+      "link": "resources/slides/l16.pdf"
+    },
     {
       "date": "2026-10-15",
       "title": "Lecture 15 — Relation Repairs",
