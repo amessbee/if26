@@ -127,6 +127,11 @@
   ],
   "slides": [
     {
+      "date": "2026-10-22",
+      "title": "Lecture 17 — Functions",
+      "link": "resources/slides/l17.pdf"
+    },
+    {
       "date": "2026-10-20",
       "title": "Lecture 16 — Partial and Total Orders",
       "link": "resources/slides/l16.pdf"
