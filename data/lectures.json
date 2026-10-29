@@ -85,6 +85,11 @@
   ],
   "worksheets": [
     {
+      "date": "2026-10-29",
+      "title": "Worksheet 19",
+      "link": "resources/worksheets/ws19.pdf"
+    },
+    {
       "date": "2026-10-27",
       "title": "Worksheet 18",
       "link": "resources/worksheets/ws18.pdf"
@@ -131,6 +136,11 @@
     }
   ],
   "slides": [
+    {
+      "date": "2026-10-29",
+      "title": "Lecture 19 — Sequences and Summations",
+      "link": "resources/slides/l19.pdf"
+    },
     {
       "date": "2026-10-27",
       "title": "Lecture 18 — Sequences and Summations",
