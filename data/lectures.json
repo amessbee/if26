@@ -137,8 +137,13 @@
   ],
   "slides": [
     {
+      "date": "2026-11-3",
+      "title": "Lecture 20 — Solving Recurrence",
+      "link": "resources/slides/l20.pdf"
+    },
+    {
       "date": "2026-10-29",
-      "title": "Lecture 19 — Sequences and Summations",
+      "title": "Lecture 19 — Sequences to Recurrence",
       "link": "resources/slides/l19.pdf"
     },
     {

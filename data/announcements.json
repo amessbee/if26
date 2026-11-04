@@ -1,9 +1,14 @@
 {
   "items": [
     {
+      "date": "2026-11-3",
+      "title": "Lecture 20 slides posted",
+      "body": "Slides for Lecture 20 (Solving Recurrences) are now available. <a target=\"_blank\" href=\"resources/slides/l20.pdf\">Download PDF</a>"
+    },
+    {
       "date": "2026-10-29",
       "title": "Lecture 19 slides posted",
-      "body": "Slides for Lecture 19 (Sequences to Recurrenxe) are now available. Do go through them before the next lecture as well as the tutorial that will be held. <a target=\"_blank\" href=\"resources/slides/l19.pdf\">Download PDF</a>"
+      "body": "Slides for Lecture 19 (Sequences to Recurrence) are now available. Do go through them before the next lecture as well as the tutorial that will be held. <a target=\"_blank\" href=\"resources/slides/l19.pdf\">Download PDF</a>"
     },
     {
       "date": "2026-10-27",
@@ -38,7 +43,7 @@
     {
       "date": "2026-10-08",
       "title": "Lecture 13 slides posted",
-      "body": "Slides for Lecture 13 (Relations) are now available. You can access it here. <a target=\"_blank\" href=\"resources/slides/l12.pdf\">Download PDF</a>"
+      "body": "Slides for Lecture 13 (Relations) are now available. You can access it here. <a target=\"_blank\" href=\"resources/slides/l13.pdf\">Download PDF</a>"
     },
     {
       "date": "2026-10-02",
