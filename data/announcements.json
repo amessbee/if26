@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "date": "2026-11-06",
+      "title": "LQ12 Practice Papers posted",
+      "body": "You can access them using the following links: <a target=\"_blank\" href=\"resources/practice/plq2-1.pdf\">practice lq2-1</a>, <a target=\"_blank\" href=\"resources/practice/plq2-2.pdf\">practice lq2-2</a>"
+    },
+    {
       "date": "2026-11-3",
       "title": "Lecture 20 slides posted",
       "body": "Slides for Lecture 20 (Solving Recurrences) are now available. <a target=\"_blank\" href=\"resources/slides/l20.pdf\">Download PDF</a>"
@@ -68,7 +73,7 @@
     {
       "date": "2026-09-28",
       "title": "LQ1 Practice Paper posted",
-      "body": "You can access the practice problems <a target=\"_blank\" href=\"resources/practice/practice-lq1.pdf\">here</a>"
+      "body": "You can access the practice problems <a target=\"_blank\" href=\"resources/practice/plq1.pdf\">here</a>"
     },
     {
       "date": "2026-09-24",
