@@ -1,6 +1,16 @@
 {
   "items": [
     {
+      "date": "2026-11-17",
+      "title": "Lecture 23 slides posted",
+      "body": "Slides for Lecture 23 (Asymptotic Bounds and Counting) are now available. <a target=\"_blank\" href=\"resources/slides/l23.pdf\">Download PDF</a>"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "LQ2 Marks have been released on LMS.",
+      "body": "You may contest them with the TA who checked them during their office hours. Each TA will announce the papers they have on Slack."
+    },
+    {
       "date": "2026-11-06",
       "title": "LQ2 Practice Papers posted",
       "body": "You can access them using the following links: <a target=\"_blank\" href=\"resources/practice/plq2-1.pdf\">practice lq2-1</a>, <a target=\"_blank\" href=\"resources/practice/plq2-2.pdf\">practice lq2-2</a>"

@@ -137,7 +137,20 @@
   ],
   "slides": [
     {
-      "date": "2026-11-3",
+      "date": "2026-11-17",
+      "title": "Lecture 23 — Asymptotic Bounds and Combinatorics",
+      "link": "resources/slides/l23.pdf"
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Lecture 22 — Long Quiz 2"
+    },
+    {
+      "date": "2026-11-10",
+      "title": "Lecture 21 — Long Quiz 2 Practice"
+    },
+    {
+      "date": "2026-11-03",
       "title": "Lecture 20 — Solving Recurrence",
       "link": "resources/slides/l20.pdf"
     },
