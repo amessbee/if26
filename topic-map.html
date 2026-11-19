@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Course Topic Map</title>
+<meta name="description" content="Interactive prerequisite map of Discrete Structures topics, linked to lecture slides and worksheets." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --bg-grad: radial-gradient(1200px 700px at 15% 0%, #e8efff 0%, transparent 60%),
+               radial-gradient(900px 600px at 100% 100%, #f6e8ff 0%, transparent 55%);
+    --panel: rgba(255, 255, 255, 0.82);
+    --panel-solid: #ffffff;
+    --text: #1f2328;
+    --muted: #57606a;
+    --faint: #8c959f;
+    --border: rgba(31, 35, 40, 0.12);
+    --chip: rgba(31, 35, 40, 0.06);
+    --accent: #0969da;
+    --label-halo: rgba(246, 248, 250, 0.92);
+    --edge-dim: 0.07;
+    --shadow: 0 10px 40px rgba(31, 35, 40, 0.12);
+    --grid: rgba(31, 35, 40, 0.05);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0f16;
+    --bg-grad: radial-gradient(1200px 700px at 15% 0%, #13213a 0%, transparent 60%),
+               radial-gradient(900px 600px at 100% 100%, #241536 0%, transparent 55%);
+    --panel: rgba(22, 27, 34, 0.82);
+    --panel-solid: #161b22;
+    --text: #e6edf3;
+    --muted: #9da7b3;
+    --faint: #6e7681;
+    --border: rgba(240, 246, 252, 0.1);
+    --chip: rgba(240, 246, 252, 0.07);
+    --accent: #58a6ff;
+    --label-halo: rgba(11, 15, 22, 0.9);
+    --edge-dim: 0.06;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    --grid: rgba(240, 246, 252, 0.035);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    background-image: var(--bg-grad);
+    color: var(--text);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; color: inherit; }
+
+  /* ── Top bar ── */
+  .topbar {
+    position: fixed; top: 12px; left: 12px; right: 12px; z-index: 20;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 12px;
+    background: var(--panel);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow);
+  }
+  .brand { display: flex; flex-direction: column; line-height: 1.2; margin-right: 6px; }
+  .brand a { font-size: 12px; color: var(--muted); }
+  .brand h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .spacer { flex: 1; }
+  .search {
+    position: relative; flex: 0 1 260px; min-width: 150px;
+  }
+  .search input {
+    width: 100%; padding: 8px 12px 8px 32px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--chip); color: var(--text);
+    font: inherit; outline: none;
+  }
+  .search input:focus { border-color: var(--accent); }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: .55; }
+  .results {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; display: none;
+    background: var(--panel-solid); border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: var(--shadow); overflow: hidden; max-height: 300px; overflow-y: auto;
+  }
+  .results.open { display: block; }
+  .results button {
+    display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+    background: none; border: 0; padding: 8px 12px; cursor: pointer;
+  }
+  .results button:hover, .results button.active { background: var(--chip); }
+  .seg {
+    display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .seg button, .btn {
+    background: var(--chip); border: 0; padding: 7px 11px; cursor: pointer; font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+  }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button.on { background: var(--accent); color: #fff; }
+  .btn { border: 1px solid var(--border); border-radius: 10px; }
+  .btn:hover, .seg button:not(.on):hover { background: var(--border); }
+
+  /* ── Legend ── */
+  .legend {
+    position: fixed; left: 12px; bottom: 12px; z-index: 15;
+    background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow);
+    padding: 12px 14px; max-width: 290px; font-size: 12.5px;
+  }
+  .legend h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+  .legend .units { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .unit-chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px;
+    background: var(--chip); border: 1px solid transparent; cursor: pointer; font-size: 12px;
+    transition: opacity .15s;
+  }
+  .unit-chip .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .unit-chip.off { opacity: .38; text-decoration: line-through; }
+  .key { display: grid; grid-template-columns: 64px 1fr; gap: 6px 10px; align-items: center; color: var(--muted); }
+  .key svg { display: block; }
+  .legend .collapse { float: right; background: none; border: 0; cursor: pointer; color: var(--muted); font-size: 12px; }
+  .legend.min .body { display: none; }
+
+  /* ── Graph ── */
+  #graph { position: fixed; inset: 0; }
+  #graph svg { width: 100%; height: 100%; display: block; cursor: grab; }
+  #graph svg:active { cursor: grabbing; }
+  .node { cursor: pointer; }
+  .node circle.core { transition: stroke-width .15s; }
+  .node text {
+    font-size: 12px; font-weight: 600; fill: var(--text); pointer-events: none;
+    paint-order: stroke; stroke: var(--label-halo); stroke-width: 4px; stroke-linejoin: round;
+  }
+  .node .lec {
+    font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 500; fill: var(--muted);
+  }
+  .node, .edge { transition: opacity .2s ease; }
+  .dim .node.faded { opacity: .14; }
+  .dim .edge.faded { opacity: var(--edge-dim); }
+  .edge path { fill: none; }
+  .hidden { display: none; }
+
+  /* ── Detail panel ── */
+  .panel {
+    position: fixed; top: 84px; right: 12px; bottom: 12px; width: 370px; z-index: 18;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow);
+    overflow-y: auto; padding: 20px 20px 24px;
+    transform: translateX(calc(100% + 24px)); transition: transform .28s cubic-bezier(.2,.8,.2,1);
+  }
+  .panel.open { transform: none; }
+  .panel .close {
+    position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 8px;
+    background: var(--chip); border: 0; cursor: pointer; font-size: 16px; line-height: 1;
+  }
+  .panel .unit { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+  .panel h2 { font-size: 21px; line-height: 1.25; margin: 6px 36px 8px 0; letter-spacing: -0.015em; }
+  .imp { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+  .imp .bars { display: inline-flex; gap: 3px; }
+  .imp .bars i { width: 14px; height: 5px; border-radius: 3px; background: var(--chip); display: block; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+  .panel p.summary { color: var(--text); line-height: 1.6; margin-bottom: 16px; }
+  .panel h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .res { display: flex; flex-direction: column; gap: 6px; }
+  .res a {
+    display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: 10px;
+    background: var(--chip); color: var(--text); border: 1px solid transparent; transition: border-color .15s;
+  }
+  .res a:hover { text-decoration: none; border-color: var(--accent); }
+  .res .ic { flex: none; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font-size: 10px; font-weight: 700; color: #fff; font-family: "JetBrains Mono", monospace; }
+  .res .t { flex: 1; font-size: 13px; line-height: 1.3; }
+  .res .t small { display: block; color: var(--muted); font-size: 11.5px; }
+  .empty { color: var(--faint); font-size: 13px; font-style: italic; }
+  .links { display: flex; flex-direction: column; gap: 4px; }
+  .links button {
+    display: flex; align-items: center; gap: 8px; text-align: left; width: 100%;
+    background: none; border: 0; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 13px;
+  }
+  .links button:hover { background: var(--chip); }
+  .links .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .links .lbl { flex: 1; }
+  .strength { display: inline-flex; gap: 2px; align-items: flex-end; }
+  .strength i { display: block; width: 4px; border-radius: 1px; background: var(--faint); opacity: .3; }
+  .strength i.on { opacity: 1; background: var(--muted); }
+  .path { counter-reset: step; display: flex; flex-wrap: wrap; gap: 5px; }
+  .path button {
+    border: 0; cursor: pointer; padding: 4px 9px; border-radius: 999px; font-size: 12px; background: var(--chip);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .path button:hover { background: var(--border); }
+
+  .hint {
+    position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 12;
+    font-size: 12px; color: var(--muted); background: var(--panel); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 999px; backdrop-filter: blur(10px); pointer-events: none;
+  }
+  .tooltip {
+    position: fixed; pointer-events: none; z-index: 30; opacity: 0; transition: opacity .12s;
+    background: var(--panel-solid); border: 1px solid var(--border); box-shadow: var(--shadow);
+    border-radius: 10px; padding: 8px 11px; font-size: 12px; max-width: 260px; color: var(--text);
+  }
+  .tooltip b { display: block; font-size: 13px; margin-bottom: 2px; }
+  .tooltip span { color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .brand h1 { font-size: 14px; }
+    .search { flex: 1 1 100%; order: 5; }
+    .hint { display: none; }
+    .legend { right: 12px; max-width: none; }
+    .legend:not(.min) { max-height: 45vh; overflow-y: auto; }
+    .panel { top: auto; left: 12px; right: 12px; width: auto; height: 62vh; bottom: 12px; transform: translateY(calc(100% + 24px)); }
+    .panel.open { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div id="graph"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="index.html">← Discrete Structures · Fall 2026</a>
+      <h1>Course Topic Map</h1>
+    </div>
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Find a topic…" autocomplete="off" aria-label="Search topics" />
+      <div class="results" id="results"></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="seg" role="group" aria-label="Layout">
+      <button data-layout="flow" class="on" title="Prerequisites flow left → right">Flow</button>
+      <button data-layout="free" title="Force-directed clusters">Clusters</button>
+    </div>
+    <button class="btn" id="upcoming" aria-pressed="true" title="Show topics from the schedule that haven't been lectured yet">Upcoming ✓</button>
+    <button class="btn" id="fit" title="Fit to screen">Fit</button>
+    <button class="btn" id="theme" aria-label="Toggle theme">☀️</button>
+  </header>
+
+  <aside class="legend" id="legend">
+    <button class="collapse" id="legend-toggle">hide</button>
+    <h3>Units</h3>
+    <div class="body">
+      <div class="units" id="units"></div>
+      <h3>Reading the map</h3>
+      <div class="key">
+        <svg width="64" height="26"><circle cx="9" cy="13" r="6" fill="var(--faint)"/><circle cx="40" cy="13" r="12" fill="var(--faint)"/></svg>
+        <span>Node size = importance</span>
+        <svg width="64" height="20"><line x1="2" y1="5" x2="56" y2="5" stroke="var(--faint)" stroke-width="1.4"/><line x1="2" y1="15" x2="56" y2="15" stroke="var(--faint)" stroke-width="5"/></svg>
+        <span>A → B: A is needed for B; width = strength</span>
+        <svg width="64" height="26"><circle cx="20" cy="13" r="9" fill="none" stroke="var(--faint)" stroke-width="2" stroke-dasharray="3 3"/></svg>
+        <span>Dashed = upcoming (on schedule)</span>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+  <div class="hint" id="hint">Hover to trace prerequisites · click for slides &amp; worksheets · scroll to zoom</div>
+  <div class="tooltip" id="tip"></div>
+
+<script>
+(async function () {
+  // ── Theme (shares the course site's preference) ──
+  const root = document.documentElement;
+  const getStored = () => { try { return localStorage.getItem("theme"); } catch (e) { return null; } };
+  const applyTheme = (t) => {
+    root.setAttribute("data-theme", t);
+    try { localStorage.setItem("theme", t); } catch (e) {}
+    document.getElementById("theme").textContent = t === "dark" ? "☀️" : "🌙";
+  };
+  applyTheme(getStored() || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  document.getElementById("theme").onclick = () =>
+    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+
+  // ── Data ──
+  const [map, lec] = await Promise.all([
+    fetch("data/topic-map.json").then((r) => r.json()),
+    fetch("data/lectures.json").then((r) => r.json()).catch(() => ({})),
+  ]);
+  const slideTitle = new Map((lec.slides || []).filter((s) => s.link).map((s) => [s.link, s]));
+  const wsTitle = new Map((lec.worksheets || []).map((w) => [w.link, w]));
+  const unitById = new Map(map.units.map((u) => [u.id, u]));
+  const color = (d) => unitById.get(d.unit).color;
+
+  const nodes = map.topics.map((t) => ({ ...t }));
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const links = map.edges.map((e) => ({ source: byId.get(e.from), target: byId.get(e.to), strength: e.strength }));
+  nodes.forEach((n) => { n.prereqs = []; n.unlocks = []; });
+  links.forEach((l) => { l.source.unlocks.push(l); l.target.prereqs.push(l); });
+
+  // Longest-path depth → column in Flow layout
+  const depth = (n) => n._d ?? (n._d = n.prereqs.length ? 1 + Math.max(...n.prereqs.map((l) => depth(l.source))) : 0);
+  nodes.forEach(depth);
+  const maxDepth = d3.max(nodes, (n) => n._d);
+
+  const radius = d3.scaleSqrt().domain([1, 5]).range([9, 25]);
+  const width = d3.scaleLinear().domain([1, 3]).range([1.3, 5.5]);
+  nodes.forEach((n) => (n.r = radius(n.importance)));
+
+  const walk = (start, dir) => {
+    const seen = new Set(), stack = [start];
+    while (stack.length) {
+      const n = stack.pop();
+      for (const l of n[dir]) {
+        const m = dir === "prereqs" ? l.source : l.target;
+        if (!seen.has(m)) { seen.add(m); stack.push(m); }
+      }
+    }
+    return seen;
+  };
+  nodes.forEach((n) => { n.ancestors = walk(n, "prereqs"); n.descendants = walk(n, "unlocks"); });
+
+  // ── State ──
+  const state = { layout: "flow", showUpcoming: true, hiddenUnits: new Set(), selected: null, hovered: null };
+  const visible = (n) => (state.showUpcoming || !n.upcoming) && !state.hiddenUnits.has(n.unit);
+
+  // ── SVG scaffold ──
+  const svg = d3.select("#graph").append("svg");
+  const defs = svg.append("defs");
+  const glow = defs.append("filter").attr("id", "glow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+  glow.append("feGaussianBlur").attr("stdDeviation", 6).attr("result", "b");
+  const fm = glow.append("feMerge"); fm.append("feMergeNode").attr("in", "b"); fm.append("feMergeNode").attr("in", "SourceGraphic");
+
+  map.units.forEach((u) => {
+    const g = defs.append("radialGradient").attr("id", "g-" + u.id).attr("cx", "35%").attr("cy", "30%").attr("r", "75%");
+    g.append("stop").attr("offset", "0%").attr("stop-color", d3.color(u.color).brighter(0.9));
+    g.append("stop").attr("offset", "100%").attr("stop-color", d3.color(u.color).darker(0.35));
+    [1, 2, 3].forEach((s) => {
+      const sz = 3.2 + s * 0.9;
+      defs.append("marker").attr("id", `m-${u.id}-${s}`).attr("viewBox", "0 -5 10 10")
+        .attr("refX", 8.5).attr("refY", 0).attr("markerUnits", "userSpaceOnUse")
+        .attr("markerWidth", sz * 2.4).attr("markerHeight", sz * 2.4).attr("orient", "auto")
+        .append("path").attr("d", "M0,-4.2L10,0L0,4.2Z").attr("fill", u.color);
+    });
+  });
+
+  const viewport = svg.append("g");
+  const zoom = d3.zoom().scaleExtent([0.2, 3]).on("zoom", (e) => viewport.attr("transform", e.transform));
+  svg.call(zoom).on("dblclick.zoom", null);
+  svg.on("click", (e) => { if (e.target === svg.node()) select(null); });
+
+  const gCols = viewport.append("g");
+  const gEdges = viewport.append("g").attr("class", "edges");
+  const gNodes = viewport.append("g").attr("class", "nodes");
+
+  const COL = 175, ROW = 120;
+  const unitIndex = new Map(map.units.map((u, i) => [u.id, i]));
+
+  const edge = gEdges.selectAll("g").data(links).join("g").attr("class", "edge");
+  edge.append("path")
+    .attr("stroke", (d) => color(d.source))
+    .attr("stroke-width", (d) => width(d.strength))
+    .attr("stroke-opacity", (d) => 0.28 + d.strength * 0.14)
+    .attr("stroke-linecap", "round")
+    .attr("stroke-dasharray", (d) => (d.target.upcoming ? "5 5" : null))
+    .attr("marker-end", (d) => `url(#m-${d.source.unit}-${d.strength})`);
+  edge.on("mouseenter", (e, d) => showTip(e, `<b>${d.source.label} → ${d.target.label}</b><span>${["", "Helpful background", "Strong prerequisite", "Essential prerequisite"][d.strength]}</span>`))
+      .on("mousemove", moveTip).on("mouseleave", hideTip);
+
+  const node = gNodes.selectAll("g").data(nodes).join("g").attr("class", "node")
+    .attr("tabindex", 0).attr("role", "button").attr("aria-label", (d) => d.label);
+  node.append("circle").attr("class", "halo").attr("r", (d) => d.r + 7)
+    .attr("fill", color).attr("opacity", 0);
+  node.append("circle").attr("class", "core").attr("r", (d) => d.r)
+    .attr("fill", (d) => (d.upcoming ? "transparent" : `url(#g-${d.unit})`))
+    .attr("stroke", (d) => (d.upcoming ? color(d) : d3.color(color(d)).darker(0.6)))
+    .attr("stroke-width", (d) => (d.upcoming ? 2 : 1.2))
+    .attr("stroke-dasharray", (d) => (d.upcoming ? "4 3" : null));
+  const wrap = (s, max = 17) => s.split(" ").reduce((lines, w) => {
+    const last = lines[lines.length - 1];
+    if (last && (last + " " + w).length <= max) lines[lines.length - 1] = last + " " + w; else lines.push(w);
+    return lines;
+  }, []);
+  nodes.forEach((n) => (n.lines = wrap(n.label)));
+  node.append("text").attr("text-anchor", "middle")
+    .selectAll("tspan").data((d) => d.lines.map((t, i) => ({ t, i, d }))).join("tspan")
+    .attr("x", 0).attr("y", (o) => o.d.r + 15 + o.i * 14).text((o) => o.t);
+  node.append("text").attr("class", "lec").attr("text-anchor", "middle").attr("y", (d) => d.r + 15 + d.lines.length * 14)
+    .text((d) => (d.upcoming ? "upcoming" : d.lectures.length ? "L" + d.lectures.join(" · L") : ""));
+
+  node.on("mouseenter", (e, d) => { state.hovered = d; highlight(); showTip(e, `<b>${d.label}</b><span>${d.prereqs.length} prerequisite${d.prereqs.length === 1 ? "" : "s"} · unlocks ${d.unlocks.length}</span>`); })
+      .on("mousemove", moveTip)
+      .on("mouseleave", () => { state.hovered = null; highlight(); hideTip(); })
+      .on("click", (e, d) => { e.stopPropagation(); select(d); })
+      .on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(d); } });
+
+  // ── Simulation ──
+  const sim = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).distance(COL * 0.8).strength(0.12))
+    .force("charge", d3.forceManyBody().strength(-420))
+    .force("collide", d3.forceCollide().radius((d) => d.r + 22 + d.lines.length * 7).iterations(3))
+    .on("tick", render).stop();
+
+  function configureForces() {
+    const vis = nodes.filter(visible);
+    if (state.layout === "flow") {
+      sim.force("x", d3.forceX((d) => d._d * COL).strength(1));
+      sim.force("y", d3.forceY((d) => (unitIndex.get(d.unit) - 3) * ROW).strength(0.09));
+      sim.force("link").strength(0.06);
+      sim.force("center", null);
+    } else {
+      const angle =(i) => (i / map.units.length) * 2 * Math.PI;
+      sim.force("x", d3.forceX((d) => Math.cos(angle(unitIndex.get(d.unit))) * 420).strength(0.12));
+      sim.force("y", d3.forceY((d) => Math.sin(angle(unitIndex.get(d.unit))) * 300).strength(0.12));
+      sim.force("link").strength(0.18);
+      sim.force("center", d3.forceCenter(0, 0));
+    }
+    sim.nodes(vis);
+    sim.force("link").links(links.filter((l) => visible(l.source) && visible(l.target)));
+  }
+
+  function settle(animate) {
+    configureForces();
+    if (!animate) {
+      sim.alpha(1);
+      for (let i = 0; i < 400; i++) sim.tick();
+      render();
+      fit(false);
+    } else {
+      sim.alpha(0.9).restart();
+      setTimeout(() => fit(true), 900);
+    }
+  }
+
+  // Drag
+  node.call(d3.drag()
+    .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.2).restart(); d.fx = d.x; d.fy = d.y; })
+    .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+  function edgePath(d) {
+    const s = d.source, t = d.target;
+    const dx = t.x - s.x, dy = t.y - s.y;
+    const dist = Math.hypot(dx, dy) || 1;
+    if (state.layout === "flow" && dx > s.r + t.r + 20) {
+      // smooth horizontal S-curve with circle-trimmed ends
+      const x1 = s.x + s.r, y1 = s.y;
+      const x2 = t.x - t.r - 4, y2 = t.y;
+      const mx = (x2 - x1) * 0.5;
+      return `M${x1},${y1} C${x1 + mx},${y1} ${x2 - mx},${y2} ${x2},${y2}`;
+    }
+    // gentle arc
+    const ux = dx / dist, uy = dy / dist;
+    const bend = 0.12;
+    const cx = (s.x + t.x) / 2 - uy * dist * bend, cy = (s.y + t.y) / 2 + ux * dist * bend;
+    const a1 = Math.atan2(cy - s.y, cx - s.x), a2 = Math.atan2(t.y - cy, t.x - cx);
+    const x1 = s.x + Math.cos(a1) * s.r, y1 = s.y + Math.sin(a1) * s.r;
+    const x2 = t.x - Math.cos(a2) * (t.r + 4), y2 = t.y - Math.sin(a2) * (t.r + 4);
+    return `M${x1},${y1} Q${cx},${cy} ${x2},${y2}`;
+  }
+
+  function render() {
+    node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    edge.select("path").attr("d", edgePath);
+  }
+
+  function fit(animate) {
+    const vis = nodes.filter(visible);
+    if (!vis.length) return;
+    const pad = 60;
+    const [x0, x1] = d3.extent(vis, (d) => d.x), [y0, y1] = d3.extent(vis, (d) => d.y);
+    const W = innerWidth, H = innerHeight;
+    const topInset = 90, rightInset = state.selected && innerWidth > 760 ? 390 : 0;
+    const bw = x1 - x0 + pad * 2 + 120, bh = y1 - y0 + pad * 2 + 40;
+    const k = Math.min((W - rightInset) / bw, (H - topInset) / bh, 1.4);
+    const tx = (W - rightInset) / 2 - k * (x0 + x1) / 2;
+    const ty = topInset + (H - topInset) / 2 - k * (y0 + y1 + 30) / 2;
+    const tr = d3.zoomIdentity.translate(tx, ty).scale(k);
+    (animate ? svg.transition().duration(650) : svg).call(zoom.transform, tr);
+  }
+
+  // ── Highlighting ──
+  function highlight() {
+    const focus = state.hovered || state.selected;
+    node.classed("hidden", (d) => !visible(d));
+    edge.classed("hidden", (d) => !visible(d.source) || !visible(d.target));
+    node.select(".halo").attr("opacity", (d) => (d === state.selected ? 0.28 : 0))
+      .attr("filter", (d) => (d === state.selected ? "url(#glow)" : null));
+    node.select(".core").attr("stroke-width", (d) => (d === state.selected ? 3 : d.upcoming ? 2 : 1.2));
+    if (!focus) {
+      svg.classed("dim", false);
+      node.classed("faded", false); edge.classed("faded", false);
+      return;
+    }
+    svg.classed("dim", true);
+    const up = focus.ancestors, down = focus.descendants;
+    node.classed("faded", (d) => d !== focus && !up.has(d) && !down.has(d));
+    edge.classed("faded", (l) => {
+      const s = l.source, t = l.target;
+      const upChain = (s === focus || up.has(s)) && (t === focus || up.has(t));
+      const downChain = (s === focus || down.has(s)) && (t === focus || down.has(t));
+      return !(upChain || downChain);
+    });
+  }
+
+  // ── Detail panel ──
+  const panel = document.getElementById("panel");
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const strengthBars = (s) => `<span class="strength" title="${["", "helpful", "strong", "essential"][s]}">${[1, 2, 3].map((i) => `<i class="${i <= s ? "on" : ""}" style="height:${4 + i * 3}px"></i>`).join("")}</span>`;
+  const linkList = (arr, key) => arr.length
+    ? `<div class="links">${arr.slice().sort((a, b) => b.strength - a.strength).map((l) => {
+        const n = l[key];
+        return `<button data-id="${n.id}"><span class="dot" style="background:${color(n)}"></span><span class="lbl">${esc(n.label)}</span>${strengthBars(l.strength)}</button>`;
+      }).join("")}</div>`
+    : `<div class="empty">None — a starting point.</div>`;
+
+  function topoOrder(set) {
+    return [...set].sort((a, b) => a._d - b._d || (a.lectures[0] ?? 99) - (b.lectures[0] ?? 99));
+  }
+
+  function openPanel(d) {
+    const u = unitById.get(d.unit);
+    const slides = d.lectures.map((n) => {
+      const link = `resources/slides/l${n}.pdf`;
+      const meta = slideTitle.get(link);
+      const title = meta ? meta.title.replace(/^Lecture \d+\s*—\s*/, "") : `Lecture ${n}`;
+      const date = meta ? new Date(meta.date + "T00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "";
+      return `<a href="${link}" target="_blank" rel="noopener"><span class="ic" style="background:${u.color}">L${n}</span><span class="t">${esc(title)}<small>Lecture ${n} slides${date ? " · " + date : ""}</small></span>↗</a>`;
+    }).join("");
+    const sheets = d.worksheets.map((n) => {
+      const link = `resources/worksheets/ws${n}.pdf`;
+      const meta = wsTitle.get(link);
+      const date = meta ? new Date(meta.date + "T00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "";
+      return `<a href="${link}" target="_blank" rel="noopener"><span class="ic" style="background:${d3.color(u.color).darker(0.8)}">W${n}</span><span class="t">Worksheet ${n}<small>PDF${date ? " · " + date : ""}</small></span>↗</a>`;
+    }).join("");
+    const chain = topoOrder(d.ancestors);
+    const bars = [1, 2, 3, 4, 5].map((i) => `<i style="${i <= d.importance ? "background:" + u.color : ""}"></i>`).join("");
+
+    panel.innerHTML = `
+      <button class="close" aria-label="Close">✕</button>
+      <span class="unit" style="color:${u.color}"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:${u.color}"></span>${esc(u.name)}</span>
+      <h2>${esc(d.label)}</h2>
+      <div class="imp"><span class="bars">${bars}</span> Importance ${d.importance}/5 ${d.upcoming ? '<span class="badge">Upcoming</span>' : ""}</div>
+      <p class="summary">${esc(d.summary)}</p>
+      <h4>Lecture slides</h4>
+      <div class="res">${slides || `<div class="empty">${d.upcoming ? "Not lectured yet — see the schedule." : "No slides linked."}</div>`}</div>
+      <h4>Worksheets</h4>
+      <div class="res">${sheets || '<div class="empty">No worksheet for this topic yet.</div>'}</div>
+      <h4>Builds on</h4>
+      ${linkList(d.prereqs, "source")}
+      <h4>Leads to</h4>
+      ${d.unlocks.length ? linkList(d.unlocks, "target") : '<div class="empty">Nothing further in this course map.</div>'}
+      ${chain.length > d.prereqs.length ? `<h4>Full study path (${chain.length} topics)</h4>
+        <div class="path">${chain.map((n) => `<button data-id="${n.id}"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:${color(n)}"></span>${esc(n.label)}</button>`).join("")}</div>` : ""}
+    `;
+    panel.classList.add("open");
+    panel.scrollTop = 0;
+    panel.querySelector(".close").onclick = () => select(null);
+    panel.querySelectorAll("[data-id]").forEach((b) => (b.onclick = () => select(byId.get(b.dataset.id), true)));
+  }
+
+  function select(d, pan) {
+    if (d && !visible(d)) {
+      state.hiddenUnits.delete(d.unit);
+      if (d.upcoming) setUpcoming(true);
+      syncUnits(); settle(true);
+    }
+    state.selected = d;
+    highlight();
+    if (d) {
+      openPanel(d);
+      if (pan) {
+        const t = d3.zoomTransform(svg.node());
+        const cx = (innerWidth - (innerWidth > 760 ? 390 : 0)) / 2, cy = innerWidth > 760 ? innerHeight / 2 + 30 : innerHeight * 0.22;
+        svg.transition().duration(550).call(zoom.transform, d3.zoomIdentity.translate(cx - t.k * d.x, cy - t.k * d.y).scale(t.k));
+      }
+      try { history.replaceState(null, "", "#" + d.id); } catch (e) {}
+    } else {
+      panel.classList.remove("open");
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    }
+  }
+
+  // ── Tooltip ──
+  const tip = document.getElementById("tip");
+  function showTip(e, html) { tip.innerHTML = html; tip.style.opacity = 1; moveTip(e); }
+  function moveTip(e) {
+    const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8);
+    tip.style.left = x + "px"; tip.style.top = e.clientY + 16 + "px";
+  }
+  function hideTip() { tip.style.opacity = 0; }
+
+  // ── Controls ──
+  const unitsEl = document.getElementById("units");
+  map.units.forEach((u) => {
+    const b = document.createElement("button");
+    b.className = "unit-chip"; b.dataset.unit = u.id;
+    b.innerHTML = `<span class="dot" style="background:${u.color}"></span>${esc(u.name)}`;
+    b.onclick = () => {
+      state.hiddenUnits.has(u.id) ? state.hiddenUnits.delete(u.id) : state.hiddenUnits.add(u.id);
+      if (state.selected && !visible(state.selected)) select(null);
+      syncUnits(); highlight(); settle(true);
+    };
+    unitsEl.appendChild(b);
+  });
+  function syncUnits() {
+    unitsEl.querySelectorAll(".unit-chip").forEach((b) => b.classList.toggle("off", state.hiddenUnits.has(b.dataset.unit)));
+  }
+
+  const upBtn = document.getElementById("upcoming");
+  function setUpcoming(on) {
+    state.showUpcoming = on;
+    upBtn.textContent = on ? "Upcoming ✓" : "Upcoming";
+    upBtn.setAttribute("aria-pressed", on);
+  }
+  upBtn.onclick = () => {
+    setUpcoming(!state.showUpcoming);
+    if (state.selected && !visible(state.selected)) select(null);
+    highlight(); settle(true);
+  };
+
+  document.querySelectorAll("[data-layout]").forEach((b) => (b.onclick = () => {
+    if (state.layout === b.dataset.layout) return;
+    state.layout = b.dataset.layout;
+    document.querySelectorAll("[data-layout]").forEach((x) => x.classList.toggle("on", x === b));
+    settle(true);
+  }));
+  document.getElementById("fit").onclick = () => fit(true);
+  const legend = document.getElementById("legend");
+  document.getElementById("legend-toggle").onclick = (e) => {
+    legend.classList.toggle("min");
+    e.target.textContent = legend.classList.contains("min") ? "show" : "hide";
+  };
+  if (innerWidth <= 760) { legend.classList.add("min"); document.getElementById("legend-toggle").textContent = "show"; }
+
+  // Search
+  const q = document.getElementById("q"), results = document.getElementById("results");
+  let active = 0, matches = [];
+  function renderResults() {
+    const s = q.value.trim().toLowerCase();
+    matches = s ? nodes.filter((n) => (n.label + " " + n.summary).toLowerCase().includes(s)).slice(0, 8) : [];
+    active = 0;
+    results.innerHTML = matches.map((n, i) =>
+      `<button data-id="${n.id}" class="${i === 0 ? "active" : ""}"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:${color(n)}"></span>${esc(n.label)}</button>`).join("")
+      || (s ? '<div class="empty" style="padding:8px 12px">No match</div>' : "");
+    results.classList.toggle("open", !!s);
+    results.querySelectorAll("button").forEach((b) => (b.onmousedown = (e) => { e.preventDefault(); pick(byId.get(b.dataset.id)); }));
+  }
+  function pick(n) { q.value = ""; results.classList.remove("open"); q.blur(); select(n, true); }
+  q.addEventListener("input", renderResults);
+  q.addEventListener("blur", () => results.classList.remove("open"));
+  q.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      active = (active + (e.key === "ArrowDown" ? 1 : -1) + matches.length) % (matches.length || 1);
+      results.querySelectorAll("button").forEach((b, i) => b.classList.toggle("active", i === active));
+    } else if (e.key === "Enter" && matches[active]) pick(matches[active]);
+  });
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape") select(null);
+    if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+  addEventListener("resize", () => fit(false));
+
+  // ── Go ──
+  settle(false);
+  highlight();
+  const initial = byId.get(decodeURIComponent(location.hash.slice(1)));
+  if (initial) select(initial, true);
+})();
+</script>
+</body>
+</html>
