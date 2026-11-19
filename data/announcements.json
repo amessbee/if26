@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "date": "2026-11-19",
+      "title": "Lecture 24 slides posted",
+      "body": "Slides for Lecture 24 (Counting and Orders) are now available. <a target=\"_blank\" href=\"resources/slides/l24.pdf\">Download PDF</a>"
+    },
+    {
       "date": "2026-11-17",
       "title": "Lecture 23 slides posted",
       "body": "Slides for Lecture 23 (Asymptotic Bounds and Counting) are now available. <a target=\"_blank\" href=\"resources/slides/l23.pdf\">Download PDF</a>"

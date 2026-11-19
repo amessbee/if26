@@ -137,6 +137,11 @@
   ],
   "slides": [
     {
+      "date": "2026-11-19",
+      "title": "Lecture 24 — Counting and Ordering",
+      "link": "resources/slides/l24.pdf"
+    },
+    {
       "date": "2026-11-17",
       "title": "Lecture 23 — Asymptotic Bounds and Combinatorics",
       "link": "resources/slides/l23.pdf"
