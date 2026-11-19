@@ -33,6 +33,15 @@ Then open: http://localhost:5500
   - Slides entries: set `link` to path like `resources/slides/l1.pdf`
   - Worksheets entries: set `link` to path like `resources/ws/ws1.pdf`
 
+### Topic map
+
+`topic-map.html` is an interactive prerequisite graph of course topics (D3, loaded from cdnjs). It reads `data/topic-map.json`:
+
+- `topics[]` — `id`, `label`, `unit`, `importance` (1–5, sets node size), `lectures` (slide numbers → `resources/slides/lN.pdf`), `worksheets` (→ `resources/worksheets/wsN.pdf`), `summary`, optional `upcoming: true`.
+- `edges[]` — `{ "from": A, "to": B, "strength": 1–3 }` means A is a prerequisite of B (1 helpful, 2 strong, 3 essential; sets arrow width).
+
+Slide and worksheet titles/dates come from `data/lectures.json`. When a new lecture is posted, add its number to the matching topic (or add a topic and its edges, and drop `upcoming`).
+
 ### Add homework
 
 1. Place files under `resources/hw/` (e.g., `hw1.tex`, `hw1.pdf`).
