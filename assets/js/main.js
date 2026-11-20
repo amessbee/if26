@@ -105,8 +105,7 @@
       </div>`;
     el.innerHTML = `
       <div class="grid-2">
-        ${mk("Instructor", [data.instructor.name + (data.instructor.affiliation ? " — " + data.instructor.affiliation : "")])}
-        ${mk("Teaching Fellow", [data.coInstructor])}
+        ${mk("Teaching Fellow", [data.coInstructor]).replace('class="card"', 'class="card" style="grid-column: 1 / -1"')}
         ${mk("Teaching Assistants (Group A)", data.tas.slice(0, Math.ceil(data.tas.length / 2)))}
         ${mk("Teaching Assistants (Group B)", data.tas.slice(Math.ceil(data.tas.length / 2)))}
       </div>
