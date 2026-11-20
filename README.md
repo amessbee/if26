@@ -15,13 +15,23 @@ A lightweight static website to share lecture notes, plans, announcements, sylla
 
 ## Run locally (macOS)
 
-From the workspace root:
+Requires Node.js 18+. From the workspace root:
 
 ```bash
-python3 -m http.server 5500
+npm install        # once
+npm run dev        # live-reload server at http://localhost:5500, opens the browser
 ```
 
-Then open: http://localhost:5500
+Other scripts:
+
+| Command                | What it does                                                        |
+| ---------------------- | ------------------------------------------------------------------- |
+| `npm start`            | Same live-reload server, without opening a browser                  |
+| `npm run serve`        | Plain static server (no file watching)                              |
+| `npm run check`        | Validates `data/*.json` and that every local link/PDF path exists   |
+| `npm run format`       | Formats HTML/CSS/JS/JSON/MD with Prettier (`format:check` to verify) |
+
+No build step: GitHub Pages deploys the repo as-is. Without Node, `python3 -m http.server 5500` still works.
 
 ## Updating content
 

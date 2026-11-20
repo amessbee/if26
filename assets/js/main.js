@@ -37,6 +37,32 @@
     }
   }
 
+  // Collapse a list of items to the first `limit`, with a toggle to reveal the rest.
+  function makeCollapsible(container, itemSelector, limit, noun) {
+    if (!container) return;
+    const items = Array.from(container.querySelectorAll(itemSelector));
+    const old = container.nextElementSibling;
+    if (old && old.classList.contains("more-toggle")) old.remove();
+    if (items.length <= limit) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "more-toggle";
+    let expanded = false;
+    const update = () => {
+      items.forEach((el, i) => (el.hidden = !expanded && i >= limit));
+      btn.textContent = expanded
+        ? "Show less ▴"
+        : `Show all ${items.length} ${noun} ▾`;
+      btn.setAttribute("aria-expanded", String(expanded));
+    };
+    btn.addEventListener("click", () => {
+      expanded = !expanded;
+      update();
+    });
+    container.insertAdjacentElement("afterend", btn);
+    update();
+  }
+
   async function renderAnnouncements() {
     const el = document.getElementById("announcements-list");
     if (!el) return;
@@ -64,6 +90,7 @@
       )
       .join("");
     el.innerHTML = `<div class="ann-list">${items}</div>`;
+    makeCollapsible(el.querySelector(".ann-list"), ".ann-item", 3, "announcements");
   }
 
   async function renderStaff() {
@@ -84,6 +111,9 @@
         ${mk("Teaching Assistants (Group B)", data.tas.slice(Math.ceil(data.tas.length / 2)))}
       </div>
     `;
+    el.querySelectorAll(".card .list").forEach((ul) =>
+      makeCollapsible(ul, "li", 3, "TAs"),
+    );
   }
 
   async function renderSchedule() {
@@ -101,6 +131,7 @@
         </table>
       </div>
     `;
+    makeCollapsible(el.querySelector(".table-wrap"), "tbody tr", 3, "weeks");
   }
 
   async function renderLectures() {
@@ -260,6 +291,7 @@
         </div>`;
         })
         .join("");
+      makeCollapsible(materialsEl, ".card", 4, "lectures");
     }
     if (plansEl && data.plans) {
       plansEl.innerHTML = data.plans

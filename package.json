@@ -1,0 +1,22 @@
+{
+  "name": "if26",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Discrete Structures — Fall 2026 course website (static, deployed to GitHub Pages)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "browser-sync start --config bs-config.cjs",
+    "start": "browser-sync start --config bs-config.cjs --no-open",
+    "serve": "browser-sync start --config bs-config.cjs --no-open --no-ui --no-notify --watch false",
+    "check": "node scripts/check.mjs",
+    "format": "prettier --write \"**/*.{html,css,js,mjs,cjs,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,mjs,cjs,json,md}\""
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3",
+    "prettier": "^3.3.3"
+  }
+}
